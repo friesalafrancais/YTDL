@@ -11,7 +11,7 @@ Libraries:
 
 ## Installation
 
-- Download and unzip this repo.
+- Download and unzip this repo
 - Run this command from within the repo folder
 
    `pip install -r requirements.txt`
