@@ -1,5 +1,5 @@
 # YTDL
-A simple python GUI made for downloading youtube videos. Allows for the user to choose the destination folder, if no folder is chosen, it defaults to the users 'Downloads' folder. Downloads the highest resolution available.
+A simple python GUI made for downloading youtube videos. Allows the user to choose the destination folder, if no folder is chosen, it defaults to the users 'Downloads' folder. Downloads the highest resolution available.
 
 Libraries:
 
