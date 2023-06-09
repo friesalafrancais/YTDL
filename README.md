@@ -16,6 +16,6 @@ Libraries:
 
    `pip install -r requirements.txt`
    
-- Run main.py file
+- Run the main.py file
 
    `python main.py`
