@@ -7,7 +7,7 @@ Libraries:
 
 - PyTube
 
-![image](https://github.com/friesalafrancais/YTDL/assets/115602464/3bb8c1bd-86cf-4c3e-ac6f-810b1a4a7a98)
+![image](https://github.com/friesalafrancais/YTDL/assets/115602464/058fbb8c-3fec-4c4c-9b3f-cbe1efb61c0f)
 
 ## Installation
 
