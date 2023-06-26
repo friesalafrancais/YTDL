@@ -1,4 +1,5 @@
 import PySimpleGUI as sg
+import sys
 from pathlib import Path
 from pytube import YouTube
 
@@ -9,27 +10,30 @@ main_fs = ('Comic Sans MS', 12)
 # PySimpleGUI theme
 sg.theme('DarkBlue17')
 
+# Downloads by default to the users 'Downloads' folder
+defaultDownload = str(Path.home() / 'Downloads')
+
 
 # Function that creates the main window and its layout
 def main_window():
     layout = [[sg.Text('Enter URL:', font=('Comic Sans MS', 14))],
               [sg.Input(key='-url-')],
-              [sg.Button('Query Video', font=main_fs), sg.Exit(font=main_fs)]]
+              [sg.Button('Continue', font=main_fs), sg.Exit(font=main_fs)]]
 
     return sg.Window('YTDL', layout, icon=r'icon.ico', grab_anywhere=True)
 
 
-# Function that creates the video query window and its layout
-def videoquery_window():
+# Function that creates the video info window and its layout
+def videoinfo_window():
     layout = [[sg.Text('Title: ', font=main_f), sg.Text(my_video.title, font=main_f)],
               [sg.Text('Length: ', font=main_f), sg.Text(formatted_length, font=main_f)],
               [sg.Text('Author: ', font=main_f), sg.Text(my_video.author, font=main_f)],
               [sg.Text('')],
               [sg.Text('Download location:', font=main_f)],
-              [sg.Input(key='-location-'), sg.FolderBrowse(font=main_fs)],
+              [sg.Input(key='-location-', default_text=defaultDownload), sg.FolderBrowse(font=main_fs)],
               [sg.Button('Download Video', font=main_fs, button_color=('white', '#cc2b2b')),
                sg.Button('Download Audio', font=main_fs, button_color=('White', '#349beb')),
-               sg.Exit(font=main_fs)]]
+               sg.Button('Back', font=main_fs)]]
 
     return sg.Window('YTDL', layout, icon=r'icon.ico', grab_anywhere=True)
 
@@ -53,8 +57,8 @@ while True:
         MainWindow.close()
         break
 
-    # If the user enters a URL and selects 'Query Video' the main window is closed and the 'videoqueryWindow' is opened
-    elif event == 'Query Video':
+    # If the user enters a URL and selects 'Continue' the main window is closed and the 'videoinfoWindow' is opened
+    elif event == 'Continue':
         url = values['-url-']
 
         my_video = YouTube(url)
@@ -63,17 +67,17 @@ while True:
 
         MainWindow.close()
 
-        videoqueryWindow = videoquery_window()
+        videoinfoWindow = videoinfo_window()
 
-        event, values2 = videoqueryWindow.Read()
+        event, values2 = videoinfoWindow.Read()
 
         keepRunning = True
 
         while keepRunning is True:
 
-            # If the user selects 'Exit' the 'videoqueryWindow' is closed and the 'MainWindow' is opened.
-            if event in (None, 'Exit'):
-                videoqueryWindow.close()
+            # If the user selects 'Exit' the 'videoinfoWindow' is closed and the 'MainWindow' is opened.
+            if event == 'Back':
+                videoinfoWindow.close()
                 MainWindow = main_window()
                 break
 
@@ -86,7 +90,7 @@ while True:
 
                 if not values2['-location-']:
                     print('Download location not specified, defaulting to users "Downloads" folder!')
-                    downloadLocation = str(Path.home() / 'Downloads')
+                    downloadLocation = defaultDownload
 
                 video = my_video.streams.get_highest_resolution()
                 video.download(downloadLocation)
@@ -94,7 +98,7 @@ while True:
                 print('Successfully downloaded!')
 
                 # Setting 'keepRunning' to 'False' ends the while loop
-                # This closes 'videoqueryWindow' and opens 'MainWindow'
+                # This closes 'videoinfoWindow' and opens 'MainWindow'
                 keepRunning = False
 
             # If the user selects 'Download Audio' the audio file will download to the desired folder
@@ -115,8 +119,13 @@ while True:
                 print('Successfully downloaded!')
 
                 # Setting 'keepRunning' to 'False' ends the while loop
-                # This closes 'videoqueryWindow' and opens 'MainWindow'
+                # This closes 'videoinfoWindow' and opens 'MainWindow'
                 keepRunning = False
 
-        videoqueryWindow.Close()
+            # If the user exits the window using the close button on the title bar, whole GUI shuts down
+            if event == sg.WINDOW_CLOSED:
+                sys.exit()
+
+        videoinfoWindow.Close()
         MainWindow = main_window()
+        
