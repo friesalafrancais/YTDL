@@ -3,16 +3,26 @@ A simple python GUI made for downloading youtube video or audio files. Allows th
 
 Libraries:
 
-- PySimpleGUI
+- PySimpleGUI (4.60.5)
 
-- PyTube
+- PyTube (15.0.0)
 
-![image](https://github.com/friesalafrancais/YTDL/assets/115602464/40254544-4ac5-40dd-a3b0-a39eb1472505)
+Modules:
+
+- Sys
+
+![image](https://github.com/friesalafrancais/YTDL/assets/115602464/80fae6b7-7ad0-40c1-a13d-993328f7ef5a)
 
 
 
 
 
+
+
+## Prerequisites
+
+- Python (3.6 or newer)
+- Pip
 
 
 ## Installation
