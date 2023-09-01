@@ -7,8 +7,6 @@ Libraries:
 
 - PyTube (15.0.0)
 
-Modules:
-
 - Sys
 
 ![image](https://github.com/friesalafrancais/YTDL/assets/115602464/80fae6b7-7ad0-40c1-a13d-993328f7ef5a)
